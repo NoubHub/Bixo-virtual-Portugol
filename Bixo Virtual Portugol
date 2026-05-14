@@ -1,0 +1,152 @@
+programa
+{
+	funcao inicio()
+	{
+		
+		cadeia nomeMonstro
+		inteiro tipoAnimal
+		inteiro nutricao, energia, felicidade
+		inteiro opcao
+		logico continuarJogo
+		inteiro i 
+
+		
+		continuarJogo = verdadeiro
+		nutricao = 10
+		energia = 10
+		felicidade = 10
+
+		escreva("Bem-vindo ao Bixo Virtual\n")
+		escreva("Escolha o tipo de Monstro:\n")
+		escreva("1 - Dragão\n")
+		escreva("2 - Hydra\n")
+		escreva("3 - Fenix\n")
+		escreva("4 - Anaconda\n")
+		escreva("5 - Dinossauro\n")
+		escreva("Qual é o Monstro escolhido? ")
+		leia(tipoAnimal)
+
+		
+		enquanto (tipoAnimal < 1 ou tipoAnimal > 5)
+		{
+			escreva("Escolha errada, tente novamente: ")
+			leia(tipoAnimal)
+		}
+
+		escreva("Dê um nome ao seu Monstro: ")
+		leia(nomeMonstro)
+
+		
+		enquanto (continuarJogo)
+		{
+			limpa()
+			escreva("Nome: ", nomeMonstro, " | Espécie: ")
+			
+			se (tipoAnimal == 1) {
+				escreva("Dragão\n")
+			} senao se (tipoAnimal == 2) {
+				escreva("Hydra\n")
+			} senao se (tipoAnimal == 3) {
+				escreva("Fenix\n")
+			} senao se (tipoAnimal == 4) {
+				escreva("Anaconda\n")
+			} senao {
+				escreva("Dinossauror\n")
+			}
+
+			escreva("Nutrição: ", nutricao, "/10\n")
+			escreva("Energia: ", energia, "/10\n")
+			escreva("Felicidade: ", felicidade, "/10\n")
+			
+			
+			se (nutricao == 0 e energia == 0)
+			{
+				escreva("Seu Monstro, ", nomeMonstro, ", morreu por falta de nutrição e energia. Fim de jogo.\n")
+				continuarJogo = falso
+				pare
+			}
+
+			
+			se (nutricao == 0) {
+				escreva("ALERTA: A nutrição de ", nomeMonstro, " está em 0! Alimente-o urgentemente!\n")
+			}
+			se (energia == 0) {
+				escreva("ALERTA: A energia de ", nomeMonstro, " está em 0! Ele precisa descansar!\n")
+			}
+			se (felicidade == 0) {
+				escreva("ALERTA: A felicidade de ", nomeMonstro, " está em 0! Brinque com ele!\n")
+			}
+			escreva("\n")
+
+			escreva("Escolha uma ação:\n")
+			escreva("1 - Alimentar\n")
+			escreva("2 - Brincar\n")
+			escreva("3 - Dormir\n")
+			escreva("4 - Sair\n")
+			leia(opcao)
+
+			se (opcao == 1) 
+			{
+				nutricao = nutricao + 2
+				se (nutricao > 10) {
+					nutricao = 10
+				}
+				escreva("Você alimentou ", nomeMonstro, ". Nutrição aumentou!\n")
+			}
+			senao se (opcao == 2) 
+			{
+				para (i = 1; i <= 2; i++)
+				{
+					felicidade = felicidade + 1
+					energia = energia - 1
+				}
+				se (felicidade > 10) {
+					felicidade = 10
+				}
+				se (energia < 0) {
+					energia = 0
+				}
+				escreva("Você brincou com ", nomeMonstro, ". Felicidade aumentou, energia diminuiu!\n")
+			}
+			senao se (opcao == 3) 
+			{
+				energia = energia + 3
+				nutricao = nutricao - 2
+				se (energia > 10) {
+					energia = 10
+				}
+				se (nutricao < 0) {
+					nutricao = 0
+				}
+				escreva("Você colocou ", nomeMonstro, " para dormir. Energia aumentou, mas ele acordou com fome!\n")
+			}
+			senao se (opcao == 4)
+			{
+				continuarJogo = falso
+				escreva("Saindo do jogo. Até mais!\n")
+			}
+			senao 
+			{
+				escreva("Opção inválida. Por favor, escolha uma opção entre 1 e 4.\n")
+			}
+
+			
+			se (opcao >= 1 e opcao <= 3)
+			{
+				nutricao = nutricao - 1
+				energia = energia - 1
+				felicidade = felicidade - 2
+
+				se (nutricao < 0) { nutricao = 0 }
+				se (energia < 0) { energia = 0 }
+				se (felicidade < 0) { felicidade = 0 }
+			}
+			
+			se (continuarJogo)
+			{
+				escreva("Pressione ENTER para continuar...")
+				leia(nomeMonstro) 
+			}
+		}
+	}
+}
